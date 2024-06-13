@@ -29,6 +29,25 @@
             success: function (func1) {
                 let w = jQuery.parseJSON(func1);
                 console.log(w);
+
+                let tablehtml = "<table class=table table-bordered>"
+                    + "<tr>"
+                    + "<th>Ürün Id</th>"
+                    + "<th>Ürün Adı</th>"
+                    + "<th>Ürün Fiyat</th>"
+                    + "<th>Ürün Stok</th>"
+                    + "</tr>";
+                $.each(w, (index, value) => {
+                    tablehtml += `<tr>`
+                        + `<td>${value.ProductId}</td>`
+                        + `<td>${value.Name}</td>`
+                        + `<td>${value.Price}</td>`
+                        + `<td>${value.Stock}</td>`
+                        + `</tr>`
+                });
+                tablehtml += "</table>";
+                $("#productlist").html(tablehtml);
+
             }
         });
     });
