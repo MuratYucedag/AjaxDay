@@ -5,6 +5,10 @@
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+
 <h3 class="alert alert-primary">Ajax İşlemleri</h3>
 
 <button class="btn btn-outline-primary" id="btnlist" type="button">Ürün Listesi</button>
@@ -15,9 +19,24 @@
 
 <hr />
 
-<div id="productlist">
-
+<div class="alert alert-info">Ürün Listesi</div>
+<div id="productlist" >
+    
 </div>
+
+<hr />
+
+<div>
+    <div class="alert alert-info">Yeni Ürün Girişi</div>
+    <input type="text" id="txtname" placeholder="Ürün Adını Giriniz" class="form-control" />
+    <br />
+    <input type="text" id="txtprice" placeholder="Ürün Fiyatını Giriniz" class="form-control" />
+    <br />
+    <input type="text" id="txtstock" placeholder="Ürün Stok Sayısını Giriniz" class="form-control" />
+    <br />
+</div>
+
+
 
 <script>
     $("#btnlist").click(function () {
@@ -51,4 +70,23 @@
             }
         });
     });
+    
+    $("#btncreate").click(function () {
+        let productvalues = {
+            Name: $("#txtname").val(),
+            Stock: $("#txtstock").val(),
+            Price: $("#txtprice").val()
+        };
+
+        $.ajax({
+            type: "post",
+            url: "/Default/CreateProduct/",
+            data: productvalues,
+            success: function (funk2) {
+                let result = jQuery.parseJSON(funk2);
+                swal("Tebrikler!", "Ürün başarıyla eklendi!", "success");
+            }
+        });
+    });
+
 </script>
