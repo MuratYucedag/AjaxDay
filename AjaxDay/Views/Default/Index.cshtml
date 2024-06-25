@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Index";
 }
 
@@ -20,8 +19,7 @@
 <hr />
 
 <div class="alert alert-info">Ürün Listesi</div>
-<div id="productlist" >
-    
+<div id="productlist">
 </div>
 
 <hr />
@@ -36,6 +34,16 @@
     <br />
 </div>
 
+<div>
+    <div class="alert alert-info">Ürün Silme İşlemi</div>
+    <input type="text" id="txtdeletedid" class="form-control" placeholder="Silinecek Id değerini giriniz" />
+</div>
+
+
+<div class="alert alert-info">ID Değerine Göre Ürün Bilgisi</div>
+<div id="productlistbyid">
+    <input type="text" id="getproductid" placeholder="Bilgileri Getirilecek Ürün Id Değeri" class="form-control" />
+</div>
 
 
 <script>
@@ -70,7 +78,7 @@
             }
         });
     });
-    
+
     $("#btncreate").click(function () {
         let productvalues = {
             Name: $("#txtname").val(),
@@ -85,6 +93,34 @@
             success: function (funk2) {
                 let result = jQuery.parseJSON(funk2);
                 swal("Tebrikler!", "Ürün başarıyla eklendi!", "success");
+            }
+        });
+    });
+
+    $("#btndelete").click(x => {
+        let id = $("#txtdeletedid").val();
+        $.ajax({
+            url: "/Default/DeleteProduct/" + id,
+            type: "post",
+            contentType: "application/json",
+            dataType: "json",
+            success: function (funk3) {
+                alert("Ürün Başarıyla Silindi");
+            }
+        });
+    });
+
+    $("#btnget").click(x => {
+        let id = $("#getproductid").val();
+
+        $.ajax({
+            contentType: "application/json",
+            dataType: "json",
+            type: "Get",
+            url: "/Default/GetProduct/" + id,
+            success: function (funk4) {
+                let result = jQuery.parseJSON(funk4);
+                console.log(result);
             }
         });
     });
