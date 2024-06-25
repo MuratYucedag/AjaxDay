@@ -136,4 +136,22 @@
         });
     });
 
+    $("#btnupdate").click(function () {
+        let values = {
+            ProductId: $("#txteditid").val(),
+            Price: $("#txteditprice").val(),
+            Name: $("#txteditname").val(),
+            Stock: $("#txteditstock").val()
+        };
+
+        $.ajax({
+            type: "post",
+            url: "/Default/UpdateProduct/",
+            data: values,
+            success: function (funk5) {
+                alert("Güncelleme Başarıyla Yapıldı");
+            }
+        });
+    });
+
 </script>
